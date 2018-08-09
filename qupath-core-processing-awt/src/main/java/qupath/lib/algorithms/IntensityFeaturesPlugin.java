@@ -131,6 +131,14 @@ public class IntensityFeaturesPlugin extends AbstractInteractivePlugin<BufferedI
 		CHANNEL_6("channel6", "Channel 6"),
 		CHANNEL_7("channel7", "Channel 7"),
 		CHANNEL_8("channel8", "Channel 8"),
+		CHANNEL_9("channel9", "Channel 9"),
+		CHANNEL_10("channel10", "Channel 10"),
+		CHANNEL_11("channel11", "Channel 11"),
+		CHANNEL_12("channel12", "Channel 12"),
+		CHANNEL_13("channel13", "Channel 13"),
+		CHANNEL_14("channel14", "Channel 14"),
+		CHANNEL_15("channel15", "Channel 15"),
+		CHANNEL_16("channel16", "Channel 16"),
 		
 		;
 		
@@ -235,6 +243,22 @@ public class IntensityFeaturesPlugin extends AbstractInteractivePlugin<BufferedI
 				return !imageData.getServer().isRGB() && imageData.getServer().nChannels() >= 7;
 			case CHANNEL_8:
 				return !imageData.getServer().isRGB() && imageData.getServer().nChannels() >= 8;
+			case CHANNEL_9:
+				return !imageData.getServer().isRGB() && imageData.getServer().nChannels() >= 9;
+			case CHANNEL_10:
+				return !imageData.getServer().isRGB() && imageData.getServer().nChannels() >= 10;
+			case CHANNEL_11:
+				return !imageData.getServer().isRGB() && imageData.getServer().nChannels() >= 11;
+			case CHANNEL_12:
+				return !imageData.getServer().isRGB() && imageData.getServer().nChannels() >= 12;
+			case CHANNEL_13:
+				return !imageData.getServer().isRGB() && imageData.getServer().nChannels() >= 13;
+			case CHANNEL_14:
+				return !imageData.getServer().isRGB() && imageData.getServer().nChannels() >= 14;
+			case CHANNEL_15:
+				return !imageData.getServer().isRGB() && imageData.getServer().nChannels() >= 15;
+			case CHANNEL_16:
+				return !imageData.getServer().isRGB() && imageData.getServer().nChannels() >= 16;
 			default:
 				return false;
 			}
@@ -282,6 +306,22 @@ public class IntensityFeaturesPlugin extends AbstractInteractivePlugin<BufferedI
 				return img.getRaster().getSamples(0, 0, img.getWidth(), img.getHeight(), 6, pixels);
 			case CHANNEL_8:
 				return img.getRaster().getSamples(0, 0, img.getWidth(), img.getHeight(), 7, pixels);
+			case CHANNEL_9:
+				return img.getRaster().getSamples(0, 0, img.getWidth(), img.getHeight(), 8, pixels);
+			case CHANNEL_10:
+				return img.getRaster().getSamples(0, 0, img.getWidth(), img.getHeight(), 9, pixels);
+			case CHANNEL_11:
+				return img.getRaster().getSamples(0, 0, img.getWidth(), img.getHeight(), 10, pixels);
+			case CHANNEL_12:
+				return img.getRaster().getSamples(0, 0, img.getWidth(), img.getHeight(), 11, pixels);
+			case CHANNEL_13:
+				return img.getRaster().getSamples(0, 0, img.getWidth(), img.getHeight(), 12, pixels);
+			case CHANNEL_14:
+				return img.getRaster().getSamples(0, 0, img.getWidth(), img.getHeight(), 13, pixels);
+			case CHANNEL_15:
+				return img.getRaster().getSamples(0, 0, img.getWidth(), img.getHeight(), 14, pixels);
+			case CHANNEL_16:
+				return img.getRaster().getSamples(0, 0, img.getWidth(), img.getHeight(), 15, pixels);
 			default:
 				break;
 			}
@@ -335,10 +375,10 @@ public class IntensityFeaturesPlugin extends AbstractInteractivePlugin<BufferedI
 		int tileWidth, tileHeight;
 		if (server.hasPixelSizeMicrons()) {
 			double tileSize = params.getDoubleParameterValue("tileSizeMicrons");
-			tileWidth = (int)(tileSize / server.getPixelWidthMicrons() + .5);
-			tileHeight = (int)(tileSize / server.getPixelHeightMicrons() + .5);
+			tileWidth = (int)Math.round(tileSize / server.getPixelWidthMicrons());
+			tileHeight = (int)Math.round(tileSize / server.getPixelHeightMicrons());
 		} else {
-			tileWidth = (int)(params.getDoubleParameterValue("tileSizePx") + .5);
+			tileWidth = (int)Math.round(params.getDoubleParameterValue("tileSizePixels"));
 			tileHeight = tileWidth;
 		}
 		return new ImmutableDimension(tileWidth, tileHeight);
@@ -879,6 +919,14 @@ public class IntensityFeaturesPlugin extends AbstractInteractivePlugin<BufferedI
 				case CHANNEL_6:
 				case CHANNEL_7:
 				case CHANNEL_8:
+				case CHANNEL_9:
+				case CHANNEL_10:
+				case CHANNEL_11:
+				case CHANNEL_12:
+				case CHANNEL_13:
+				case CHANNEL_14:
+				case CHANNEL_15:
+				case CHANNEL_16:
 					if (originalBitsPerPixel <= 16) {
 						nBins = (int)Math.pow(2, originalBitsPerPixel);
 						minBin = 0;
